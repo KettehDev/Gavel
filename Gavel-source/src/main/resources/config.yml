@@ -1,0 +1,198 @@
+# Gavel config. Text uses MiniMessage: https://docs.advntr.dev/minimessage/format.html
+# <prefix> works in every message.
+
+prefix: "<dark_gray>[<red>Gavel</red>]</dark_gray> "
+
+# shown on ban screens, use it for your discord or forum
+appeal: "discord.gg/yourserver"
+
+date-format: "MMM d yyyy, HH:mm"
+
+# reason used when console punishes someone without giving one
+default-reason: "Breaking the rules"
+
+# tell the whole server when someone gets punished (add -s to a command to keep it quiet)
+broadcast:
+  warn: false
+  mute: false
+  kick: true
+  ban: true
+  blacklist: true
+
+# ask "are you sure?" before these go through from the menu
+confirm: [ban, blacklist]
+
+# commands muted players can't use either
+muted-commands: [msg, tell, w, whisper, r, reply, me, mail, say]
+
+# automatic punishments when someone collects enough active warnings
+warn-escalation:
+  enabled: true
+  steps:
+    3: "mute 1h"
+    5: "ban 1d"
+    7: "ban perm"
+
+freeze:
+  # ban players that log out while frozen
+  ban-on-logout: true
+  logout-ban-duration: perm
+  logout-ban-reason: "Logged out while frozen"
+  # frozen players' chat only goes to staff, handy for screenshares
+  chat-to-staff: true
+  # commands a frozen player can still run
+  allowed-commands: [msg, tell, r, reply]
+  blindness: false
+
+commandspy:
+  # never shown to spies
+  ignored: [login, register, l, reg, changepassword]
+
+report-cooldown: 60
+
+# preset buttons in the menus. icon = any item, duration only matters for mute/ban
+presets:
+  warn:
+    - {name: "Spam", reason: "Spamming chat", icon: PAPER}
+    - {name: "Toxicity", reason: "Being toxic", icon: POISONOUS_POTATO}
+    - {name: "Caps", reason: "Excessive caps", icon: OAK_SIGN}
+    - {name: "Advertising", reason: "Advertising other servers", icon: GOLDEN_HORSE_ARMOR}
+    - {name: "Inappropriate", reason: "Inappropriate language", icon: ROTTEN_FLESH}
+    - {name: "Disrespect", reason: "Disrespecting staff", icon: IRON_HELMET}
+    - {name: "Griefing", reason: "Minor griefing", icon: TNT}
+  mute:
+    - {name: "Spam", reason: "Spamming chat", duration: 30m, icon: PAPER}
+    - {name: "Toxicity", reason: "Being toxic", duration: 2h, icon: POISONOUS_POTATO}
+    - {name: "Advertising", reason: "Advertising other servers", duration: 1d, icon: GOLDEN_HORSE_ARMOR}
+    - {name: "Slurs", reason: "Use of slurs", duration: 7d, icon: BARRIER}
+    - {name: "Threats", reason: "Threatening players", duration: 14d, icon: IRON_SWORD}
+    - {name: "Permanent", reason: "Repeated chat offences", duration: perm, icon: BEDROCK}
+  kick:
+    - {name: "AFK", reason: "AFK", icon: CLOCK}
+    - {name: "Spam", reason: "Spamming", icon: PAPER}
+    - {name: "Calm down", reason: "Take a breather and come back", icon: BLUE_ICE}
+  ban:
+    - {name: "Hacking", reason: "Unfair advantage / hacked client", duration: 30d, icon: DIAMOND_SWORD}
+    - {name: "X-Ray", reason: "X-ray / ore ESP", duration: 14d, icon: DIAMOND_ORE}
+    - {name: "Griefing", reason: "Griefing", duration: 7d, icon: TNT}
+    - {name: "Exploiting", reason: "Abusing bugs / exploits", duration: 7d, icon: COMMAND_BLOCK}
+    - {name: "Ban evasion", reason: "Ban evasion", duration: perm, icon: ENDER_PEARL}
+    - {name: "Scamming", reason: "Scamming players", duration: 14d, icon: GOLD_INGOT}
+    - {name: "Inappropriate build", reason: "Inappropriate builds or skins", duration: 3d, icon: BRICKS}
+    - {name: "Permanent", reason: "Serious rule break", duration: perm, icon: BEDROCK}
+  blacklist:
+    - {name: "Ban evasion", reason: "Repeated ban evasion", icon: ENDER_PEARL}
+    - {name: "Doxxing", reason: "Sharing personal information", icon: WRITABLE_BOOK}
+    - {name: "DDoS threats", reason: "Threatening the server", icon: TNT_MINECART}
+    - {name: "Chargeback", reason: "Chargeback / payment fraud", icon: EMERALD}
+
+# what players see when they get kicked or try to join. one line per entry
+# placeholders: <reason> <staff> <duration> <expires> <id> <appeal> <player>
+screens:
+  ban:
+    - "<red><bold>You are banned from this server"
+    - ""
+    - "<gray>Reason: <white><reason>"
+    - "<gray>Banned by: <white><staff>"
+    - "<gray>Expires: <white><expires>"
+    - ""
+    - "<dark_gray>Ban ID: #<id>"
+    - "<gray>Appeal at <aqua><appeal>"
+  blacklist:
+    - "<dark_red><bold>You are blacklisted"
+    - ""
+    - "<gray>Reason: <white><reason>"
+    - "<gray>This applies to every account on your connection."
+    - ""
+    - "<dark_gray>ID: #<id>"
+    - "<gray>This can't be appealed."
+  kick:
+    - "<gold><bold>You were kicked"
+    - ""
+    - "<gray>Reason: <white><reason>"
+    - "<gray>By: <white><staff>"
+
+messages:
+  no-permission: "<prefix><red>You don't have permission."
+  player-only: "<prefix><red>Only players can do that."
+  not-found: "<prefix><red>Never seen a player called <white><player></white>."
+  not-online: "<prefix><red><player> isn't online."
+  bypass: "<prefix><red><player> can't be punished."
+  usage: "<prefix><red>Usage: <white><usage>"
+  bad-duration: "<prefix><red><white><input></white> isn't a duration. Try 30m, 2h, 7d, 1mo or perm."
+  need-reason: "<prefix><red>You need to type a reason."
+  reloaded: "<prefix><gray>Config reloaded."
+  db-error: "<prefix><red>Something went wrong with the database, check console."
+
+  # what the punished player sees
+  warned:
+    - ""
+    - "<red><bold>WARNING</bold> <gray>from <white><staff>"
+    - "<gray>Reason: <white><reason>"
+    - "<gray>You have <white><count></white> active warning(s)."
+    - ""
+  warned-title: "<red><bold>WARNED"
+  warned-subtitle: "<white><reason>"
+  muted:
+    - ""
+    - "<red>You were muted by <white><staff></white> for <white><duration></white>."
+    - "<gray>Reason: <white><reason>"
+    - ""
+  still-muted: "<prefix><red>You're muted (<white><remaining></white> left). Reason: <white><reason>"
+  unmuted-player: "<prefix><green>You've been unmuted."
+
+  # staff notifications, [S] is added for silent ones
+  notify-warn: "<prefix><yellow><staff></yellow> <gray>warned</gray> <yellow><player></yellow> <dark_gray>»</dark_gray> <white><reason>"
+  notify-mute: "<prefix><gold><staff></gold> <gray>muted</gray> <gold><player></gold> <gray>for <white><duration></white></gray> <dark_gray>»</dark_gray> <white><reason>"
+  notify-kick: "<prefix><aqua><staff></aqua> <gray>kicked</gray> <aqua><player></aqua> <dark_gray>»</dark_gray> <white><reason>"
+  notify-ban: "<prefix><red><staff></red> <gray>banned</gray> <red><player></red> <gray>for <white><duration></white></gray> <dark_gray>»</dark_gray> <white><reason>"
+  notify-blacklist: "<prefix><dark_red><staff></dark_red> <gray>blacklisted</gray> <dark_red><player></dark_red> <dark_gray>»</dark_gray> <white><reason>"
+  notify-silent: "<dark_gray>[S]</dark_gray> "
+  notify-removed: "<prefix><green><staff></green> <gray>removed <white><type></white> from</gray> <green><player></green>"
+  notify-escalation: "<prefix><gray><player> hit <white><count></white> warnings, applying <white><action></white>."
+  notify-join-attempt: "<prefix><dark_gray><player> tried to join but is <type>."
+
+  # public broadcasts
+  broadcast-warn: "<red><player></red> <gray>was warned for</gray> <white><reason>"
+  broadcast-mute: "<red><player></red> <gray>was muted for</gray> <white><reason>"
+  broadcast-kick: "<red><player></red> <gray>was kicked for</gray> <white><reason>"
+  broadcast-ban: "<red><player></red> <gray>was banned for</gray> <white><reason>"
+  broadcast-blacklist: "<dark_red><player></dark_red> <gray>was blacklisted.</gray>"
+
+  nothing-to-remove: "<prefix><gray><player> isn't <type>."
+  removed: "<prefix><green>Removed <type> from <player>."
+  warn-removed: "<prefix><green>Removed warning #<id>."
+  no-such-id: "<prefix><red>No active punishment with id #<id>."
+
+  frozen: "<prefix><aqua><player></aqua> <gray>is now frozen."
+  unfrozen: "<prefix><aqua><player></aqua> <gray>is no longer frozen."
+  you-frozen:
+    - ""
+    - "<aqua><bold>YOU HAVE BEEN FROZEN"
+    - "<gray>Don't log out, you'll be banned."
+    - "<gray>Follow the instructions from staff."
+    - ""
+  you-frozen-title: "<aqua><bold>FROZEN"
+  you-frozen-subtitle: "<gray>Don't log out"
+  you-unfrozen: "<prefix><green>You've been unfrozen, carry on."
+  frozen-blocked: "<red>You can't do that while frozen."
+  frozen-chat: "<aqua>[Frozen] <white><player></white>: <gray><message>"
+  frozen-left: "<prefix><red><player> logged out while frozen!"
+
+  spy-on: "<prefix><gray>Command spy <green>on</green>."
+  spy-off: "<prefix><gray>Command spy <red>off</red>."
+  spy-format: "<dark_gray>[Spy] <gray><player>: <white><command>"
+
+  staffchat-format: "<dark_aqua>[Staff] <aqua><player></aqua><dark_gray>:</dark_gray> <white><message>"
+  staffchat-on: "<prefix><gray>Staff chat <green>on</green>, everything you type goes to staff."
+  staffchat-off: "<prefix><gray>Staff chat <red>off</red>."
+
+  report-sent: "<prefix><green>Thanks, staff have been told."
+  report-cooldown: "<prefix><red>You can report again in <white><remaining></white>."
+  report-self: "<prefix><red>You can't report yourself."
+  report-staff: "<prefix><red><bold>REPORT</bold> <white><reporter></white> <gray>reported</gray> <white><player></white> <dark_gray>»</dark_gray> <white><reason></white> "
+  report-button: "<yellow>[Punish]"
+
+  custom-title: "<type> <player>"
+  confirm-title: "<red>Confirm <type>"
+  confirm-body: "<gray><type> <white><player></white> for <white><reason></white> (<white><duration></white>)?"

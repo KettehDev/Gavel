@@ -1,0 +1,84 @@
+name: Gavel
+version: '1.0.0'
+main: net.hatpack.gavel.GavelPlugin
+api-version: '1.21'
+description: Warns, mutes, bans, blacklists, freezes and the rest
+commands:
+  warn:
+    description: Warn a player
+  mute:
+    description: Mute a player
+    aliases: [tempmute]
+  kick:
+    description: Kick a player
+  ban:
+    description: Ban a player
+    aliases: [tempban]
+  blacklist:
+    description: Ban a player and every account on their IP
+  unwarn:
+    description: Remove a warning by id, or all of a player's warnings
+    aliases: [delwarn]
+  unmute:
+    description: Unmute a player
+  unban:
+    description: Unban a player
+    aliases: [pardon]
+  unblacklist:
+    description: Lift a blacklist
+  freeze:
+    description: Freeze or unfreeze a player
+    aliases: [ss]
+  history:
+    description: A player's punishment history
+    aliases: [hist, warnings]
+  check:
+    description: Quick look at a player's status
+    aliases: [lookup]
+  alts:
+    description: Accounts that share an IP
+  punish:
+    description: Open the punish menu for a player
+    aliases: [p]
+  commandspy:
+    description: See the commands players run
+    aliases: [cspy, spy]
+  staffchat:
+    description: Talk to other staff
+    aliases: [sc]
+  report:
+    description: Report a player to staff
+  gavel:
+    description: Gavel admin
+permissions:
+  gavel.*:
+    default: op
+    children:
+      gavel.warn: true
+      gavel.mute: true
+      gavel.kick: true
+      gavel.ban: true
+      gavel.blacklist: true
+      gavel.unwarn: true
+      gavel.unmute: true
+      gavel.unban: true
+      gavel.unblacklist: true
+      gavel.freeze: true
+      gavel.history: true
+      gavel.check: true
+      gavel.alts: true
+      gavel.alts.ip: true
+      gavel.punish: true
+      gavel.commandspy: true
+      gavel.staffchat: true
+      gavel.notify: true
+      gavel.reload: true
+      gavel.report: true
+  gavel.report:
+    default: true
+  gavel.bypass:
+    description: Can't be punished or frozen by other staff
+    default: false
+  gavel.commandspy.exempt:
+    description: Your commands don't show up in command spy
+    default: false
